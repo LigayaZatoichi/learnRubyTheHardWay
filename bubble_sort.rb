@@ -36,7 +36,7 @@ puts numbers.bubble_sort
 
 huge_array = []
 
-10000000.times do
+100000.times do
   huge_array.push(rand(1000000))
 end
 puts huge_array.sort.inspect
