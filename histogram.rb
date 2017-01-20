@@ -1,5 +1,5 @@
 file_name = ARGV.first
-words = open(file_name).read.downcase
+words = open(file_name).read.downcase.gsub(/[^a-z0-9\s]/i, "")
 
 array = words.split(" ")
 count = Hash.new(0)

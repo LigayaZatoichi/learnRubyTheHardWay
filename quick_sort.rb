@@ -3,7 +3,7 @@ arr = [73, 46, 67, 45, 69, 11, 34, 90, 94, 13, 49, 42]
 def quick_sort(arr)
   if arr.size <= 1
     return arr
-  end  
+  end
     left = []
     right = []
     pivot = arr.pop
@@ -17,4 +17,4 @@ def quick_sort(arr)
     return left + [pivot] + right
 end
 
-puts quick_sort(arr)
+puts quick_sort(arr).inspect
