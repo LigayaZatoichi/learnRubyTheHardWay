@@ -16,8 +16,7 @@ def choose_word
   return @words [rand @words.size]
 end
 
-def display_word(answer, letters_guessed)
-  answer_letters = answer.split("")
+def display_word(answer_letters, letters_guessed)
   display_array = []
   answer_letters.each do |letters|
     if letters_guessed.include? letters
@@ -28,22 +27,34 @@ def display_word(answer, letters_guessed)
   end
 # Displays array of underscores and letters_guesed, spaced-separated.
   puts display_array.join(" ")
+  return display_array
 end
 
-answer = choose_word
-letters_guessed = ['a', 'e', 's', 't', 'd', 'r', 'q']
+answer_letters = choose_word.split("")
+letters_guessed = []
 guesses_left = 6
+state = []
+
+state = display_word(answer_letters, letters_guessed)
 
 # Loop until there are no more guesses left.
-while guesses_left > 0
-  print "Guess a letter:"
-  display_word(answer, letters_guessed)
+while guesses_left > 0 && state.include?("_")
+  print "Guess a letter: (#{guesses_left} guesses left.)"
   guess = gets.chomp
-  puts "Your guess was #{guess}"
   letters_guessed.push(guess)
+  if answer_letters.include?(guess)
+    puts "Your guess, #{guess}, was correct!"
+  else
+    puts "No, you suck!"
+    guesses_left -= 1
+  end
+  state = display_word(answer_letters, letters_guessed)
 end
 
-puts "You lost. ;-; Try again? <3"
-exit(0)
-display_word(answer, letters_guessed)
-# Gets the letter guessed from the user.
+
+if guesses_left > 0
+puts "You win."
+else
+puts "You lose! Good day, sir!"
+puts "The word was '#{answer_letters.join("")}'."
+end
